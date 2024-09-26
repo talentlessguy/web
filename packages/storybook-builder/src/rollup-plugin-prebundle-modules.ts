@@ -41,9 +41,9 @@ export function rollupPluginPrebundleModules(env: Record<string, string>): Plugi
           path: require.resolve('path-browserify'),
 
           /* for @storybook/addon-docs */
-          ...(moduleExists('@storybook/react-dom-shim') && {
-            '@storybook/react-dom-shim': getReactDomShimAlias(),
-          }),
+          // ...(moduleExists('@storybook/react-dom-shim') && {
+          //   '@storybook/react-dom-shim': getReactDomShimAlias(),
+          // }),
         },
         define: (() => {
           const define = stringifyProcessEnvs(env);
@@ -114,9 +114,9 @@ export const CANDIDATES = [
 
 function getReactDomShimAlias() {
   const { version } = require('react-dom');
-  return version.startsWith('18')
-    ? require.resolve('@storybook/react-dom-shim/dist/react-18').replace(/\.js$/, '.mjs')
-    : require.resolve('@storybook/react-dom-shim').replace(/\.js$/, '.mjs');
+  return version.startsWith('16')
+    ? require.resolve('@storybook/react-dom-shim/dist/react-16')
+    : require.resolve('@storybook/react-dom-shim') 
 }
 
 function moduleExists(moduleName: string) {
